@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package com.tub;
+
+option java_multiple_files = true;
+option java_package = "com.tub";
+option java_outer_classname = "Myproto";
+
+message NachrichtSenden {
+  string nachricht = 1;
+  string User=2;
+  string timestamp=3;
+  string id=4;
+}
+
+message NachirchtEmpfangen {
+  string nachricht = 1;
+  bool gelesen = 2;
+}
+
+message NachrichtenRequest{
+}
+
+message Nachricht{
+  string id=1;
+  string user=2;
+  string nachricht=3;
+  string timestamp=4;
+}
+
+message NachrichtenAntwort{
+  repeated Nachricht nachrichten=1;
+}
+
+service ChatService{
+
+  rpc senden (NachrichtSenden) returns (NachirchtEmpfangen);
+
+  rpc holeNachrichten(NachrichtenRequest)
+      returns (NachrichtenAntwort);
+
+}
